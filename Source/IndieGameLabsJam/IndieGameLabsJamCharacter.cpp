@@ -83,9 +83,12 @@ void AIndieGameLabsJamCharacter::UpdateAnimation()
 {
 	const FVector PlayerVelocity = GetVelocity();
 	const float PlayerSpeedSqr = PlayerVelocity.SizeSquared();
-
+	
 	// Are we moving or standing still?
 	UPaperFlipbook* DesiredAnimation = (PlayerSpeedSqr > 0.0f) ? RunningAnimation : IdleAnimation;
+	UE_LOG(LogTemp, Warning, TEXT("%f"),);
+	DesiredAnimation = (PlayerVelocity.Z > 0.0f) ? JumpingAnimation : DesiredAnimation;
+	
 	if( GetSprite()->GetFlipbook() != DesiredAnimation 	)
 	{
 		GetSprite()->SetFlipbook(DesiredAnimation);
